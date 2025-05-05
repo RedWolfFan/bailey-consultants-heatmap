@@ -2,6 +2,7 @@ import folium
 from folium.plugins import HeatMap, FastMarkerCluster
 import pandas as pd
 from folium import LayerControl, FeatureGroup
+import os
 
 # Load the CSV data for coordinates and consultant counts
 coords_df = pd.read_csv('bailey_consultants.csv')
@@ -27,7 +28,7 @@ consultant_data = [
     {"Prefix": "", "Last Name": "Hurst", "First Name": "Sandra", "Primary Subject": "Leadership", "Other Subject 1": "Math (Middle)", "Other Subject 2": "", "Mobile": "501-259-8492", "Email": "shurst.baileyedgroup@gmail.com", "State": "AR", "City": "Little Rock", "Tutoring": "Yes", "Training": ""},
     {"Prefix": "", "Last Name": "Inman", "First Name": "Sarah", "Primary Subject": "Leadership", "Other Subject 1": "Math", "Other Subject 2": "", "Mobile": "870-489-7214", "Email": "sinman@baileyarch.com", "State": "", "City": "Hot Springs", "Tutoring": "", "Training": "Yes Math"},
     {"Prefix": "", "Last Name": "Jackson", "First Name": "Cortney", "Primary Subject": "Leadership", "Other Subject 1": "ELA", "Other Subject 2": "", "Mobile": "662-592-1608", "Email": "cjackson@baileyarch.com", "State": "MS", "City": "Clarksdale", "Tutoring": "Yes", "Training": "Yes ELA"},
-    {"Prefix": "", "Last Name": "Jimerson", "First Name": "Kim", "Primary Subject": "ELA (Elem.)", "Other Subject 1": "Math (Elem.)", "Other Subject 2": "Pre-K", "Mobile": "501-593-3517", "Email": "kjimersonbaileycoach@gmail.com", "State": "AR", "City": " Searcy", "Tutoring": "No", "Training": "Yes Leadership"},
+    {"Prefix": "", "Last Name": "Jimerson", "First Name": "Kim", "Primary Subject": "ELA (Elem.)", "Other Subject 1": "Math (Elem.)", "Other Subject 2": "Pre-K", "Mobile": "501-593-3517", "Email": "kjimersonbaileycoach@gmail.com", "State": "AR", "City": "Searcy", "Tutoring": "No", "Training": "Yes Leadership"},
     {"Prefix": "Dr.", "Last Name": "Lawson", "First Name": "Jennifer", "Primary Subject": "Leadership", "Other Subject 1": "ELA", "Other Subject 2": "", "Mobile": "479-444-1400", "Email": "drlawson.baileyed@gmail.com", "State": "AR", "City": "Fayetteville", "Tutoring": "", "Training": ""},
     {"Prefix": "", "Last Name": "Leuken", "First Name": "Rebecca", "Primary Subject": "SPED", "Other Subject 1": "ELA", "Other Subject 2": "Leadership", "Mobile": "501-690-4187", "Email": "rllueken1115@yahoo.com", "State": "AR", "City": "Greenbrier", "Tutoring": "", "Training": "Yes ELA"},
     {"Prefix": "", "Last Name": "Lindley", "First Name": "Rob", "Primary Subject": "Leadership", "Other Subject 1": "", "Other Subject 2": "", "Mobile": "870-897-6387", "Email": "rlindley0316@gmail.com", "State": "AR", "City": "Rogers", "Tutoring": "Yes", "Training": "Yes ELA; Unavailable: May 5-16, June 16-20, July 7-10, Aug 13-Oct 3"},
@@ -46,7 +47,7 @@ consultant_data = [
     {"Prefix": "", "Last Name": "Torrence", "First Name": "Venus", "Primary Subject": "ELA", "Other Subject 1": "Leadership", "Other Subject 2": "", "Mobile": "501-940-6562", "Email": "VENUS.TORRENCE@GMAIL.COM", "State": "AR", "City": "Little Rock", "Tutoring": "No", "Training": ""},
     {"Prefix": "", "Last Name": "Verkler", "First Name": "Dawn", "Primary Subject": "Math", "Other Subject 1": "Leadership", "Other Subject 2": "", "Mobile": "501-680-9993", "Email": "ddkverkler@yahoo.com", "State": "AR", "City": "Lonoke", "Tutoring": "Yes", "Training": ""},
     {"Prefix": "", "Last Name": "White", "First Name": "Kristen", "Primary Subject": "Secondary ELA", "Other Subject 1": "ELA", "Other Subject 2": "Gifted Ed", "Mobile": "501-802-1626", "Email": "kwhiteeducon@gmail.com", "State": "AR", "City": "Hot Springs", "Tutoring": "", "Training": ""},
-    {"Prefix": "", "Last Name": "White", "First Name": "Katina", "Primary Subject": "Science", "Other Subject 1": "Math", "Other Subject 2": "", "Mobile": "501-310-7960", "Email": "katinawhite35@gmail.com", "State": "AR", "City": "Little Rock",  "Tutoring": "", "Training": ""},
+    {"Prefix": "", "Last Name": "White", "First Name": "Katina", "Primary Subject": "Science", "Other Subject 1": "Math", "Other Subject 2": "", "Mobile": "501-310-7960", "Email": "katinawhite35@gmail.com", "State": "AR", "City": "Little Rock", "Tutoring": "", "Training": ""},
     {"Prefix": "", "Last Name": "Williams", "First Name": "Jerrod", "Primary Subject": "Leadership", "Other Subject 1": "", "Other Subject 2": "", "Mobile": "501-454-0148", "Email": "jkwilliamsconsultant@gmail.com", "State": "AR", "City": "Searcy", "Tutoring": "", "Training": ""},
     {"Prefix": "", "Last Name": "Wilson", "First Name": "Kirsten", "Primary Subject": "Leadership", "Other Subject 1": "ELA", "Other Subject 2": "Math/Science (Elem and MS)", "Mobile": "254-744-0941", "Email": "teachkiwi@gmail.com", "State": "AR", "City": "Greenbrier", "Tutoring": "", "Training": ""},
     {"Prefix": "", "Last Name": "Wooldridge", "First Name": "Laura", "Primary Subject": "ELA K12", "Other Subject 1": "Leadership", "Other Subject 2": "", "Mobile": "870-240-3374", "Email": "laurawooldridge.beg@gmail.com", "State": "AR", "City": "Paragould", "Tutoring": "", "Training": ""},
@@ -66,6 +67,10 @@ consultants_df = consultants_df[(consultants_df['State'] == 'AR') & (consultants
 
 # Group consultants by city
 grouped = consultants_df.groupby('City')
+
+# Create output directory for GitHub Pages
+output_dir = 'docs'
+os.makedirs(output_dir, exist_ok=True)
 
 # Create a base map centered on Arkansas with professional tiles
 arkansas_map = folium.Map(location=[34.8, -92.2], zoom_start=7, tiles='CartoDB Positron')
@@ -151,10 +156,9 @@ marker_layer.add_to(arkansas_map)
 # Add layer control
 LayerControl().add_to(arkansas_map)
 
-# Add title and logo placeholder
+# Add title (no logo to ensure online compatibility)
 title_html = '''
     <div style='background:#2b3e50; color:white; padding:10px; text-align:center; font-family:Arial,sans-serif; box-shadow:0 2px 4px rgba(0,0,0,0.2);'>
-        <img src='https://via.placeholder.com/50' style='float:left; margin-right:10px;' alt='Logo'>
         <h3 style='margin:0; font-size:18px;'>Bailey Consultants Heat Map (Arkansas, 2025-2026)</h3>
     </div>
 '''
@@ -182,5 +186,5 @@ footer_html = '''
 '''
 arkansas_map.get_root().html.add_child(folium.Element(footer_html))
 
-# Save the map
-arkansas_map.save('bailey_consultants_heatmap.html')
+# Save the map in the docs directory
+arkansas_map.save(os.path.join(output_dir, 'index.html'))

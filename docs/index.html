@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_83ef3ae7f4b88f349e4b17254af606ba {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+    <script src="https://cdn.jsdelivr.net/gh/python-visualization/folium@main/folium/templates/leaflet_heat.min.js"></script>
+</head>
+<body>
+    
+    
+    <div style='background:#2b3e50; color:white; padding:10px; text-align:center; font-family:Arial,sans-serif; box-shadow:0 2px 4px rgba(0,0,0,0.2);'>
+        <h3 style='margin:0; font-size:18px;'>Bailey Consultants Heat Map (Arkansas, 2025-2026)</h3>
+    </div>
+    
+    <div style='position:fixed; bottom:10px; left:10px; background:white; padding:10px; border:1px solid #ccc; font-family:Arial,sans-serif; font-size:12px; box-shadow:0 2px 4px rgba(0,0,0,0.2);'>
+        <b>Legend</b><br>
+        <span style='color:#0000ff;'>■</span> Low Density (1 consultant)<br>
+        <span style='color:#00ffff;'>■</span> Low-Medium<br>
+        <span style='color:#ffff00;'>■</span> Medium<br>
+        <span style='color:#ff9900;'>■</span> Medium-High<br>
+        <span style='color:#ff0000;'>■</span> High Density (6 consultants)<br>
+        <span style='color:#2b3e50;'>●</span> Consultant Location
+    </div>
+    
+    <div style='position:fixed; bottom:10px; right:10px; font-family:Arial,sans-serif; font-size:10px; color:#666;'>
+        Data Source: Bailey Consultants 2025-2026 | Generated: May 5, 2025
+    </div>
+    
+            <div class="folium-map" id="map_83ef3ae7f4b88f349e4b17254af606ba" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_83ef3ae7f4b88f349e4b17254af606ba = L.map(
+                "map_83ef3ae7f4b88f349e4b17254af606ba",
+                {
+                    center: [34.8, -92.2],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 7,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_c49e8720b8e3add061800e6865aec544 = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_c49e8720b8e3add061800e6865aec544.addTo(map_83ef3ae7f4b88f349e4b17254af606ba);
+        
+    
+            var feature_group_203ad419299197a2d81cba4c05a62b54 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var heat_map_7cdf35cbdd545d26514f05792daa7ab3 = L.heatLayer(
+                [[34.7465, -92.2896, 6], [35.234, -92.3877, 3], [34.5037, -93.0552, 3], [35.2506, -91.7362, 3], [36.0626, -94.1574, 2], [35.2784, -93.1338, 2], [34.9984, -91.9838, 1], [36.3648, -93.568, 1], [35.9087, -90.8023, 1], [34.8879, -91.1946, 1], [34.9745, -92.0165, 1], [35.3859, -94.3985, 1], [36.3354, -93.436, 1], [35.5643, -90.7168, 1], [34.5054, -92.2054, 1], [35.5081, -90.1473, 1], [34.7839, -91.8999, 1], [34.657, -92.3868, 1], [35.1151, -91.8807, 1], [35.2912, -93.4202, 1], [36.0584, -90.4973, 1], [34.2284, -92.0032, 1], [36.2631, -90.2926, 1], [36.332, -94.1185, 1], [36.3712, -91.8226, 1], [35.0304, -91.9501, 1], [34.5291, -90.5901, 1], [34.0379, -94.3413, 1]],
+                {
+  "minOpacity": 0.5,
+  "maxZoom": 10,
+  "radius": 15,
+  "blur": 10,
+}
+            );
+        
+    
+            heat_map_7cdf35cbdd545d26514f05792daa7ab3.addTo(feature_group_203ad419299197a2d81cba4c05a62b54);
+        
+    
+            feature_group_203ad419299197a2d81cba4c05a62b54.addTo(map_83ef3ae7f4b88f349e4b17254af606ba);
+        
+    
+            var feature_group_9e52996556f6aa97c5ffc5cc08b8bb38 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var circle_marker_2a79c6a790cd3df1a42afa1f0fdf5697 = L.circleMarker(
+                [34.7465, -92.2896],
+                {"bubblingMouseEvents": true, "color": "#2b3e50", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2b3e50", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(feature_group_9e52996556f6aa97c5ffc5cc08b8bb38);
+        
+    
+        var popup_4101c91eb1a65b6a07924b4bbb298416 = L.popup({
+  "maxWidth": 700,
+});
+
+        
+            
+                var html_9c8d083d983e5b847d9981004a61d68a = $(`<div id="html_9c8d083d983e5b847d9981004a61d68a" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial,sans-serif; max-height:400px; overflow-y:auto;'>         <h4>Little Rock</h4>         <p><b>Consultants:</b> 6<br><b>Subjects:</b> Leadership: 2, ELA: 2, PreK: 1, Science: 1</p>         <table style='width:100%; border-collapse:collapse; font-size:11px;'>             <tr style='background:#2b3e50; color:white;'>                 <th style='padding:5px;'>Name</th>                 <th style='padding:5px;'>Primary Subject</th>                 <th style='padding:5px;'>Other Subjects</th>                 <th style='padding:5px;'>Mobile</th>                 <th style='padding:5px;'>Email</th>                 <th style='padding:5px;'>Tutoring</th>                 <th style='padding:5px;'>Training/Notes</th>             </tr>                  <tr style='background:#f9f9f9;'>                 <td style='padding:5px;'>Rhonda Bradford</td>                 <td style='padding:5px;'>Leadership</td>                 <td style='padding:5px;'></td>                 <td style='padding:5px;'>501-472-0539</td>                 <td style='padding:5px;'>bradford4445@gmail.com</td>                 <td style='padding:5px;'></td>                 <td style='padding:5px;'></td>             </tr>                      <tr style='background:#ffffff;'>                 <td style='padding:5px;'>Sandra Hurst</td>                 <td style='padding:5px;'>Leadership</td>                 <td style='padding:5px;'>Math (Middle)</td>                 <td style='padding:5px;'>501-259-8492</td>                 <td style='padding:5px;'>shurst.baileyedgroup@gmail.com</td>                 <td style='padding:5px;'>Yes</td>                 <td style='padding:5px;'></td>             </tr>                      <tr style='background:#f9f9f9;'>                 <td style='padding:5px;'>Dr. Jennifer Nelson</td>                 <td style='padding:5px;'>PreK</td>                 <td style='padding:5px;'>K12 Literacy, Leadership</td>                 <td style='padding:5px;'>501-350-0086</td>                 <td style='padding:5px;'>drjennifern.edconsultant@gmail.com</td>                 <td style='padding:5px;'>Wants to sub for tutors initially</td>                 <td style='padding:5px;'></td>             </tr>                      <tr style='background:#ffffff;'>                 <td style='padding:5px;'>Monica Nicole Simpson</td>                 <td style='padding:5px;'>ELA</td>                 <td style='padding:5px;'>Science, Leadership</td>                 <td style='padding:5px;'>501-786-8748</td>                 <td style='padding:5px;'>instructionalcoachmonica@gmail.com</td>                 <td style='padding:5px;'>Yes</td>                 <td style='padding:5px;'>Yes ELA</td>             </tr>                      <tr style='background:#f9f9f9;'>                 <td style='padding:5px;'>Venus Torrence</td>                 <td style='padding:5px;'>ELA</td>                 <td style='padding:5px;'>Leadership</td>                 <td style='padding:5px;'>501-940-6562</td>                 <td style='padding:5px;'>VENUS.TORRENCE@GMAIL.COM</td>                 <td style='padding:5px;'>No</td>                 <td style='padding:5px;'></td>             </tr>                      <tr style='background:#ffffff;'>                 <td style='padding:5px;'>Katina White</td>                 <td style='padding:5px;'>Science</td>                 <td style='padding:5px;'>Math</td>                 <td style='padding:5px;'>501-310-7960</td>                 <td style='padding:5px;'>katinawhite35@gmail.com</td>                 <td style='padding:5px;'></td>                 <td style='padding:5px;'></td>             </tr>         </table></div></div>`)[0];
+                popup_4101c91eb1a65b6a07924b4bbb298416.setContent(html_9c8d083d983e5b847d9981004a61d68a);
+            
+        
+
+        circle_marker_2a79c6a790cd3df1a42afa1f0fdf5697.bindPopup(popup_4101c91eb1a65b6a07924b4bbb298416)
+        ;
+
+        
+    
+    
+            circle_marker_2a79c6a790cd3df1a42afa1f0fdf5697.bindTooltip(
+                `<div>
+                     Little Rock
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_b975453c849891d49d0cbef21ae2a030 = L.circleMarker(
+                [35.234, -92.3877],
+                {"bubblingMouseEvents": true, "color": "#2b3e50", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2b3e50", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(feature_group_9e52996556f6aa97c5ffc5cc08b8bb38);
+        
+    
+        var popup_ee397c848144b7cfd1f676c505970f1b = L.popup({
+  "maxWidth": 700,
+});
+
+        
+            
+                var html_373cf1d64bb6f6196208c22120cf2fc1 = $(`<div id="html_373cf1d64bb6f6196208c22120cf2fc1" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial,sans-serif; max-height:400px; overflow-y:auto;'>         <h4>Greenbrier</h4>         <p><b>Consultants:</b> 4<br><b>Subjects:</b> Math: 1, ELA (Elem/Middle): 1, SPED: 1, Leadership: 1</p>         <table style='width:100%; border-collapse:collapse; font-size:11px;'>             <tr style='background:#2b3e50; color:white;'>                 <th style='padding:5px;'>Name</th>                 <th style='padding:5px;'>Primary Subject</th>                 <th style='padding:5px;'>Other Subjects</th>                 <th style='padding:5px;'>Mobile</th>                 <th style='padding:5px;'>Email</th>                 <th style='padding:5px;'>Tutoring</th>                 <th style='padding:5px;'>Training/Notes</th>             </tr>                  <tr style='background:#f9f9f9;'>                 <td style='padding:5px;'>Debbie Gibson</td>                 <td style='padding:5px;'>Math</td>                 <td style='padding:5px;'></td>                 <td style='padding:5px;'>501-679-1366</td>                 <td style='padding:5px;'>gibsondebbie532@gmail.com</td>                 <td style='padding:5px;'>Yes</td>                 <td style='padding:5px;'>Yes ELA</td>             </tr>                      <tr style='background:#ffffff;'>                 <td style='padding:5px;'>Sarah Havens</td>                 <td style='padding:5px;'>ELA (Elem/Middle)</td>                 <td style='padding:5px;'></td>                 <td style='padding:5px;'>501-581-1456</td>                 <td style='padding:5px;'>tshavens14@gmail.com</td>                 <td style='padding:5px;'></td>                 <td style='padding:5px;'></td>             </tr>                      <tr style='background:#f9f9f9;'>                 <td style='padding:5px;'>Rebecca Leuken</td>                 <td style='padding:5px;'>SPED</td>                 <td style='padding:5px;'>ELA, Leadership</td>                 <td style='padding:5px;'>501-690-4187</td>                 <td style='padding:5px;'>rllueken1115@yahoo.com</td>                 <td style='padding:5px;'></td>                 <td style='padding:5px;'>Yes ELA</td>             </tr>                      <tr style='background:#ffffff;'>                 <td style='padding:5px;'>Kirsten Wilson</td>                 <td style='padding:5px;'>Leadership</td>                 <td style='padding:5px;'>ELA, Math/Science (Elem and MS)</td>                 <td style='padding:5px;'>254-744-0941</td>                 <td style='padding:5px;'>teachkiwi@gmail.com</td>                 <td style='padding:5px;'></td>                 <td style='padding:5px;'></td>             </tr>         </table></div></div>`)[0];
+                popup_ee397c848144b7cfd1f676c505970f1b.setContent(html_373cf1d64bb6f6196208c22120cf2fc1);
+            
+        
+
+        circle_marker_b975453c849891d49d0cbef21ae2a030.bindPopup(popup_ee397c848144b7cfd1f676c505970f1b)
+        ;
+
+        
+    
+    
+            circle_marker_b975453c849891d49d0cbef21ae2a030.bindTooltip(
+                `<div>
+                     Greenbrier
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_9071910b62577469b44e036080d7e188 = L.circleMarker(
+                [34.5037, -93.0552],
+                {"bubblingMouseEvents": true, "color": "#2b3e50", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2b3e50", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(feature_group_9e52996556f6aa97c5ffc5cc08b8bb38);
+        
+    
+        var popup_2f1dbb6c7653b72a8f9cfdfe16b13c69 = L.popup({
+  "maxWidth": 700,
+});
+
+        
+            
+                var html_aa47def7c181731933d4bfb59abc3391 = $(`<div id="html_aa47def7c181731933d4bfb59abc3391" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial,sans-serif; max-height:400px; overflow-y:auto;'>         <h4>Hot Springs</h4>         <p><b>Consultants:</b> 3<br><b>Subjects:</b> ELA (Elementary): 1, ELA (K-5): 1, Secondary ELA: 1</p>         <table style='width:100%; border-collapse:collapse; font-size:11px;'>             <tr style='background:#2b3e50; color:white;'>                 <th style='padding:5px;'>Name</th>                 <th style='padding:5px;'>Primary Subject</th>                 <th style='padding:5px;'>Other Subjects</th>                 <th style='padding:5px;'>Mobile</th>                 <th style='padding:5px;'>Email</th>                 <th style='padding:5px;'>Tutoring</th>                 <th style='padding:5px;'>Training/Notes</th>             </tr>                  <tr style='background:#f9f9f9;'>                 <td style='padding:5px;'>Bridgette Crooks</td>                 <td style='padding:5px;'>ELA (Elementary)</td>                 <td style='padding:5px;'>SPED</td>                 <td style='padding:5px;'>318-584-3918</td>                 <td style='padding:5px;'>bcrooks2008@gmail.com</td>                 <td style='padding:5px;'></td>                 <td style='padding:5px;'></td>             </tr>                      <tr style='background:#ffffff;'>                 <td style='padding:5px;'>Danielle Faught</td>                 <td style='padding:5px;'>ELA (K-5)</td>                 <td style='padding:5px;'></td>                 <td style='padding:5px;'>501-282-4991</td>                 <td style='padding:5px;'>Danielle.faught@gmail.com</td>                 <td style='padding:5px;'>Yes</td>                 <td style='padding:5px;'>Yes ELA</td>             </tr>                      <tr style='background:#f9f9f9;'>                 <td style='padding:5px;'>Kristen White</td>                 <td style='padding:5px;'>Secondary ELA</td>                 <td style='padding:5px;'>ELA, Gifted Ed</td>                 <td style='padding:5px;'>501-802-1626</td>                 <td style='padding:5px;'>kwhiteeducon@gmail.com</td>                 <td style='padding:5px;'></td>                 <td style='padding:5px;'></td>             </tr>         </table></div></div>`)[0];
+                popup_2f1dbb6c7653b72a8f9cfdfe16b13c69.setContent(html_aa47def7c181731933d4bfb59abc3391);
+            
+        
+
+        circle_marker_9071910b62577469b44e036080d7e188.bindPopup(popup_2f1dbb6c7653b72a8f9cfdfe16b13c69)
+        ;
+
+        
+    
+    
+            circle_marker_9071910b62577469b44e036080d7e188.bindTooltip(
+                `<div>
+                     Hot Springs
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_1f0a676ac1f476781938d97240ccd079 = L.circleMarker(
+                [35.2506, -91.7362],
+                {"bubblingMouseEvents": true, "color": "#2b3e50", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2b3e50", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(feature_group_9e52996556f6aa97c5ffc5cc08b8bb38);
+        
+    
+        var popup_722828adb803b006f47ba581110bf87e = L.popup({
+  "maxWidth": 700,
+});
+
+        
+            
+                var html_b7fa52d0647f320fe1660a3e4e5cb22a = $(`<div id="html_b7fa52d0647f320fe1660a3e4e5cb22a" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial,sans-serif; max-height:400px; overflow-y:auto;'>         <h4>Searcy</h4>         <p><b>Consultants:</b> 3<br><b>Subjects:</b> ELA (Elem.): 1, Leadership: 1, ELA (Elementary/Middle): 1</p>         <table style='width:100%; border-collapse:collapse; font-size:11px;'>             <tr style='background:#2b3e50; color:white;'>                 <th style='padding:5px;'>Name</th>                 <th style='padding:5px;'>Primary Subject</th>                 <th style='padding:5px;'>Other Subjects</th>                 <th style='padding:5px;'>Mobile</th>                 <th style='padding:5px;'>Email</th>                 <th style='padding:5px;'>Tutoring</th>                 <th style='padding:5px;'>Training/Notes</th>             </tr>                  <tr style='background:#f9f9f9;'>                 <td style='padding:5px;'>Kim Jimerson</td>                 <td style='padding:5px;'>ELA (Elem.)</td>                 <td style='padding:5px;'>Math (Elem.), Pre-K</td>                 <td style='padding:5px;'>501-593-3517</td>                 <td style='padding:5px;'>kjimersonbaileycoach@gmail.com</td>                 <td style='padding:5px;'>No</td>                 <td style='padding:5px;'>Yes Leadership</td>             </tr>                      <tr style='background:#ffffff;'>                 <td style='padding:5px;'>Jerrod Williams</td>                 <td style='padding:5px;'>Leadership</td>                 <td style='padding:5px;'></td>                 <td style='padding:5px;'>501-454-0148</td>                 <td style='padding:5px;'>jkwilliamsconsultant@gmail.com</td>                 <td style='padding:5px;'></td>                 <td style='padding:5px;'></td>             </tr>                      <tr style='background:#f9f9f9;'>                 <td style='padding:5px;'>Kelly Wright</td>                 <td style='padding:5px;'>ELA (Elementary/Middle)</td>                 <td style='padding:5px;'>Social Studies (Middle)</td>                 <td style='padding:5px;'>479-841-1722</td>                 <td style='padding:5px;'>kellyheslepwright@gmail.com</td>                 <td style='padding:5px;'></td>                 <td style='padding:5px;'></td>             </tr>         </table></div></div>`)[0];
+                popup_722828adb803b006f47ba581110bf87e.setContent(html_b7fa52d0647f320fe1660a3e4e5cb22a);
+            
+        
+
+        circle_marker_1f0a676ac1f476781938d97240ccd079.bindPopup(popup_722828adb803b006f47ba581110bf87e)
+        ;
+
+        
+    
+    
+            circle_marker_1f0a676ac1f476781938d97240ccd079.bindTooltip(
+                `<div>
+                     Searcy
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e51b934f00c5c5bf33608a7f9770d216 = L.circleMarker(
+                [36.0626, -94.1574],
+                {"bubblingMouseEvents": true, "color": "#2b3e50", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2b3e50", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(feature_group_9e52996556f6aa97c5ffc5cc08b8bb38);
+        
+    
+        var popup_e2c6dce2eeda023eb4ad69aad5e4b8f8 = L.popup({
+  "maxWidth": 700,
+});
+
+        
+            
+                var html_fe176c086528aefff6e100746aeadcb0 = $(`<div id="html_fe176c086528aefff6e100746aeadcb0" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial,sans-serif; max-height:400px; overflow-y:auto;'>         <h4>Fayetteville</h4>         <p><b>Consultants:</b> 2<br><b>Subjects:</b> Leadership: 1, Not onboarded: 1</p>         <table style='width:100%; border-collapse:collapse; font-size:11px;'>             <tr style='background:#2b3e50; color:white;'>                 <th style='padding:5px;'>Name</th>                 <th style='padding:5px;'>Primary Subject</th>                 <th style='padding:5px;'>Other Subjects</th>                 <th style='padding:5px;'>Mobile</th>                 <th style='padding:5px;'>Email</th>                 <th style='padding:5px;'>Tutoring</th>                 <th style='padding:5px;'>Training/Notes</th>             </tr>                  <tr style='background:#f9f9f9;'>                 <td style='padding:5px;'>Dr. Jennifer Lawson</td>                 <td style='padding:5px;'>Leadership</td>                 <td style='padding:5px;'>ELA</td>                 <td style='padding:5px;'>479-444-1400</td>                 <td style='padding:5px;'>drlawson.baileyed@gmail.com</td>                 <td style='padding:5px;'></td>                 <td style='padding:5px;'></td>             </tr>                      <tr style='background:#ffffff;'>                 <td style='padding:5px;'>Cindy Wade</td>                 <td style='padding:5px;'>Not onboarded</td>                 <td style='padding:5px;'></td>                 <td style='padding:5px;'></td>                 <td style='padding:5px;'></td>                 <td style='padding:5px;'></td>                 <td style='padding:5px;'>Applied/Not onboarded</td>             </tr>         </table></div></div>`)[0];
+                popup_e2c6dce2eeda023eb4ad69aad5e4b8f8.setContent(html_fe176c086528aefff6e100746aeadcb0);
+            
+        
+
+        circle_marker_e51b934f00c5c5bf33608a7f9770d216.bindPopup(popup_e2c6dce2eeda023eb4ad69aad5e4b8f8)
+        ;
+
+        
+    
+    
+            circle_marker_e51b934f00c5c5bf33608a7f9770d216.bindTooltip(
+                `<div>
+                     Fayetteville
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_8425eaf0458a64c69398753e7f4588e4 = L.circleMarker(
+                [35.2784, -93.1338],
+                {"bubblingMouseEvents": true, "color": "#2b3e50", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2b3e50", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(feature_group_9e52996556f6aa97c5ffc5cc08b8bb38);
+        
+    
+        var popup_ba359de817935c7b92f1d710c806cfea = L.popup({
+  "maxWidth": 700,
+});
+
+        
+            
+                var html_efc451a797006e7ed2b83bc7c0bb9137 = $(`<div id="html_efc451a797006e7ed2b83bc7c0bb9137" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial,sans-serif; max-height:400px; overflow-y:auto;'>         <h4>Russellville</h4>         <p><b>Consultants:</b> 2<br><b>Subjects:</b> Math: 1, Leadership: 1</p>         <table style='width:100%; border-collapse:collapse; font-size:11px;'>             <tr style='background:#2b3e50; color:white;'>                 <th style='padding:5px;'>Name</th>                 <th style='padding:5px;'>Primary Subject</th>                 <th style='padding:5px;'>Other Subjects</th>                 <th style='padding:5px;'>Mobile</th>                 <th style='padding:5px;'>Email</th>                 <th style='padding:5px;'>Tutoring</th>                 <th style='padding:5px;'>Training/Notes</th>             </tr>                  <tr style='background:#f9f9f9;'>                 <td style='padding:5px;'>Laura Gotcher</td>                 <td style='padding:5px;'>Math</td>                 <td style='padding:5px;'></td>                 <td style='padding:5px;'></td>                 <td style='padding:5px;'>lauraleegotcher@gmail.com</td>                 <td style='padding:5px;'>Yes</td>                 <td style='padding:5px;'></td>             </tr>                      <tr style='background:#ffffff;'>                 <td style='padding:5px;'>Dr. Mark Gotcher</td>                 <td style='padding:5px;'>Leadership</td>                 <td style='padding:5px;'></td>                 <td style='padding:5px;'>479-970-1082</td>                 <td style='padding:5px;'>mlgotcher@gmail.com</td>                 <td style='padding:5px;'>Yes</td>                 <td style='padding:5px;'>Needs Training</td>             </tr>         </table></div></div>`)[0];
+                popup_ba359de817935c7b92f1d710c806cfea.setContent(html_efc451a797006e7ed2b83bc7c0bb9137);
+            
+        
+
+        circle_marker_8425eaf0458a64c69398753e7f4588e4.bindPopup(popup_ba359de817935c7b92f1d710c806cfea)
+        ;
+
+        
+    
+    
+            circle_marker_8425eaf0458a64c69398753e7f4588e4.bindTooltip(
+                `<div>
+                     Russellville
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_bd7fffb6020b9195ca80a8db3d90faca = L.circleMarker(
+                [34.9984, -91.9838],
+                {"bubblingMouseEvents": true, "color": "#2b3e50", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2b3e50", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(feature_group_9e52996556f6aa97c5ffc5cc08b8bb38);
+        
+    
+        var popup_af1206d71d1f698595116b9f6abdbd9d = L.popup({
+  "maxWidth": 700,
+});
+
+        
+            
+                var html_f2e9563a83219302f70e7b2d6ed2811e = $(`<div id="html_f2e9563a83219302f70e7b2d6ed2811e" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial,sans-serif; max-height:400px; overflow-y:auto;'>         <h4>Austin</h4>         <p><b>Consultants:</b> 1<br><b>Subjects:</b> Leadership: 1</p>         <table style='width:100%; border-collapse:collapse; font-size:11px;'>             <tr style='background:#2b3e50; color:white;'>                 <th style='padding:5px;'>Name</th>                 <th style='padding:5px;'>Primary Subject</th>                 <th style='padding:5px;'>Other Subjects</th>                 <th style='padding:5px;'>Mobile</th>                 <th style='padding:5px;'>Email</th>                 <th style='padding:5px;'>Tutoring</th>                 <th style='padding:5px;'>Training/Notes</th>             </tr>                  <tr style='background:#f9f9f9;'>                 <td style='padding:5px;'>Lisa York</td>                 <td style='padding:5px;'>Leadership</td>                 <td style='padding:5px;'>PreK</td>                 <td style='padding:5px;'>501-605-7589</td>                 <td style='padding:5px;'>lyork1964@gmail.com</td>                 <td style='padding:5px;'></td>                 <td style='padding:5px;'></td>             </tr>         </table></div></div>`)[0];
+                popup_af1206d71d1f698595116b9f6abdbd9d.setContent(html_f2e9563a83219302f70e7b2d6ed2811e);
+            
+        
+
+        circle_marker_bd7fffb6020b9195ca80a8db3d90faca.bindPopup(popup_af1206d71d1f698595116b9f6abdbd9d)
+        ;
+
+        
+    
+    
+            circle_marker_bd7fffb6020b9195ca80a8db3d90faca.bindTooltip(
+                `<div>
+                     Austin
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_88ee403cfd0f13faadaa813b9bb62ebb = L.circleMarker(
+                [36.3648, -93.568],
+                {"bubblingMouseEvents": true, "color": "#2b3e50", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2b3e50", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(feature_group_9e52996556f6aa97c5ffc5cc08b8bb38);
+        
+    
+        var popup_47eb550c0400aea2aa6133660893070e = L.popup({
+  "maxWidth": 700,
+});
+
+        
+            
+                var html_ce8a337efa536d42801fbe886b9b5c1a = $(`<div id="html_ce8a337efa536d42801fbe886b9b5c1a" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial,sans-serif; max-height:400px; overflow-y:auto;'>         <h4>Berryville</h4>         <p><b>Consultants:</b> 1<br><b>Subjects:</b> Leadership: 1</p>         <table style='width:100%; border-collapse:collapse; font-size:11px;'>             <tr style='background:#2b3e50; color:white;'>                 <th style='padding:5px;'>Name</th>                 <th style='padding:5px;'>Primary Subject</th>                 <th style='padding:5px;'>Other Subjects</th>                 <th style='padding:5px;'>Mobile</th>                 <th style='padding:5px;'>Email</th>                 <th style='padding:5px;'>Tutoring</th>                 <th style='padding:5px;'>Training/Notes</th>             </tr>                  <tr style='background:#f9f9f9;'>                 <td style='padding:5px;'>Kelly Swofford</td>                 <td style='padding:5px;'>Leadership</td>                 <td style='padding:5px;'>Math (K-8)</td>                 <td style='padding:5px;'>870-654-5004</td>                 <td style='padding:5px;'>kswofford1@gmail.com</td>                 <td style='padding:5px;'></td>                 <td style='padding:5px;'>Yes Leadership</td>             </tr>         </table></div></div>`)[0];
+                popup_47eb550c0400aea2aa6133660893070e.setContent(html_ce8a337efa536d42801fbe886b9b5c1a);
+            
+        
+
+        circle_marker_88ee403cfd0f13faadaa813b9bb62ebb.bindPopup(popup_47eb550c0400aea2aa6133660893070e)
+        ;
+
+        
+    
+    
+            circle_marker_88ee403cfd0f13faadaa813b9bb62ebb.bindTooltip(
+                `<div>
+                     Berryville
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_12e37cf9de78f79c7e2b42a23c11711c = L.circleMarker(
+                [35.9087, -90.8023],
+                {"bubblingMouseEvents": true, "color": "#2b3e50", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2b3e50", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(feature_group_9e52996556f6aa97c5ffc5cc08b8bb38);
+        
+    
+        var popup_456f2c74375b01ad56a29105484d36b7 = L.popup({
+  "maxWidth": 700,
+});
+
+        
+            
+                var html_be3d4d6635f3ae409b4a0fc2df89daf8 = $(`<div id="html_be3d4d6635f3ae409b4a0fc2df89daf8" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial,sans-serif; max-height:400px; overflow-y:auto;'>         <h4>Bono</h4>         <p><b>Consultants:</b> 1<br><b>Subjects:</b> Math: 1</p>         <table style='width:100%; border-collapse:collapse; font-size:11px;'>             <tr style='background:#2b3e50; color:white;'>                 <th style='padding:5px;'>Name</th>                 <th style='padding:5px;'>Primary Subject</th>                 <th style='padding:5px;'>Other Subjects</th>                 <th style='padding:5px;'>Mobile</th>                 <th style='padding:5px;'>Email</th>                 <th style='padding:5px;'>Tutoring</th>                 <th style='padding:5px;'>Training/Notes</th>             </tr>                  <tr style='background:#f9f9f9;'>                 <td style='padding:5px;'>Angie Carlton</td>                 <td style='padding:5px;'>Math</td>                 <td style='padding:5px;'>Leadership</td>                 <td style='padding:5px;'>870-810-2280</td>                 <td style='padding:5px;'>acarlton.beg@gmail.com</td>                 <td style='padding:5px;'></td>                 <td style='padding:5px;'></td>             </tr>         </table></div></div>`)[0];
+                popup_456f2c74375b01ad56a29105484d36b7.setContent(html_be3d4d6635f3ae409b4a0fc2df89daf8);
+            
+        
+
+        circle_marker_12e37cf9de78f79c7e2b42a23c11711c.bindPopup(popup_456f2c74375b01ad56a29105484d36b7)
+        ;
+
+        
+    
+    
+            circle_marker_12e37cf9de78f79c7e2b42a23c11711c.bindTooltip(
+                `<div>
+                     Bono
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_4e304afb1c13a628531cb77350867129 = L.circleMarker(
+                [34.8879, -91.1946],
+                {"bubblingMouseEvents": true, "color": "#2b3e50", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2b3e50", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(feature_group_9e52996556f6aa97c5ffc5cc08b8bb38);
+        
+    
+        var popup_f004b9ea26329f3d65836eddd230ac5b = L.popup({
+  "maxWidth": 700,
+});
+
+        
+            
+                var html_9fca18ae06401aec076d4192bbc5a237 = $(`<div id="html_9fca18ae06401aec076d4192bbc5a237" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial,sans-serif; max-height:400px; overflow-y:auto;'>         <h4>Brinkley</h4>         <p><b>Consultants:</b> 1<br><b>Subjects:</b> Leadership: 1</p>         <table style='width:100%; border-collapse:collapse; font-size:11px;'>             <tr style='background:#2b3e50; color:white;'>                 <th style='padding:5px;'>Name</th>                 <th style='padding:5px;'>Primary Subject</th>                 <th style='padding:5px;'>Other Subjects</th>                 <th style='padding:5px;'>Mobile</th>                 <th style='padding:5px;'>Email</th>                 <th style='padding:5px;'>Tutoring</th>                 <th style='padding:5px;'>Training/Notes</th>             </tr>                  <tr style='background:#f9f9f9;'>                 <td style='padding:5px;'>Phyllis McDonald</td>                 <td style='padding:5px;'>Leadership</td>                 <td style='padding:5px;'>ELA, K12 Literacy</td>                 <td style='padding:5px;'>501-837-2938</td>                 <td style='padding:5px;'>principal102002@yahoo.com</td>                 <td style='padding:5px;'>Yes</td>                 <td style='padding:5px;'>Yes ELA</td>             </tr>         </table></div></div>`)[0];
+                popup_f004b9ea26329f3d65836eddd230ac5b.setContent(html_9fca18ae06401aec076d4192bbc5a237);
+            
+        
+
+        circle_marker_4e304afb1c13a628531cb77350867129.bindPopup(popup_f004b9ea26329f3d65836eddd230ac5b)
+        ;
+
+        
+    
+    
+            circle_marker_4e304afb1c13a628531cb77350867129.bindTooltip(
+                `<div>
+                     Brinkley
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a277e1c860e28bb31a507d23025c5808 = L.circleMarker(
+                [34.9745, -92.0165],
+                {"bubblingMouseEvents": true, "color": "#2b3e50", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2b3e50", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(feature_group_9e52996556f6aa97c5ffc5cc08b8bb38);
+        
+    
+        var popup_e5b3a289415880d6207c38af7dc83f27 = L.popup({
+  "maxWidth": 700,
+});
+
+        
+            
+                var html_1c0eda7abb006627e727f1f89d96a144 = $(`<div id="html_1c0eda7abb006627e727f1f89d96a144" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial,sans-serif; max-height:400px; overflow-y:auto;'>         <h4>Cabot</h4>         <p><b>Consultants:</b> 1<br><b>Subjects:</b> ELA: 1</p>         <table style='width:100%; border-collapse:collapse; font-size:11px;'>             <tr style='background:#2b3e50; color:white;'>                 <th style='padding:5px;'>Name</th>                 <th style='padding:5px;'>Primary Subject</th>                 <th style='padding:5px;'>Other Subjects</th>                 <th style='padding:5px;'>Mobile</th>                 <th style='padding:5px;'>Email</th>                 <th style='padding:5px;'>Tutoring</th>                 <th style='padding:5px;'>Training/Notes</th>             </tr>                  <tr style='background:#f9f9f9;'>                 <td style='padding:5px;'>Kim Wright</td>                 <td style='padding:5px;'>ELA</td>                 <td style='padding:5px;'>Leadership, MTSS</td>                 <td style='padding:5px;'>501-743-0799</td>                 <td style='padding:5px;'>kwright@baileyarch.com</td>                 <td style='padding:5px;'></td>                 <td style='padding:5px;'></td>             </tr>         </table></div></div>`)[0];
+                popup_e5b3a289415880d6207c38af7dc83f27.setContent(html_1c0eda7abb006627e727f1f89d96a144);
+            
+        
+
+        circle_marker_a277e1c860e28bb31a507d23025c5808.bindPopup(popup_e5b3a289415880d6207c38af7dc83f27)
+        ;
+
+        
+    
+    
+            circle_marker_a277e1c860e28bb31a507d23025c5808.bindTooltip(
+                `<div>
+                     Cabot
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e32805fd3274ea8f9750f42649cea905 = L.circleMarker(
+                [35.3859, -94.3985],
+                {"bubblingMouseEvents": true, "color": "#2b3e50", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2b3e50", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(feature_group_9e52996556f6aa97c5ffc5cc08b8bb38);
+        
+    
+        var popup_36f735155c70f0b1928e6baf69897ba3 = L.popup({
+  "maxWidth": 700,
+});
+
+        
+            
+                var html_b907e4237bd58137e13719b5f9b428e8 = $(`<div id="html_b907e4237bd58137e13719b5f9b428e8" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial,sans-serif; max-height:400px; overflow-y:auto;'>         <h4>Fort Smith</h4>         <p><b>Consultants:</b> 1<br><b>Subjects:</b> Leadership: 1</p>         <table style='width:100%; border-collapse:collapse; font-size:11px;'>             <tr style='background:#2b3e50; color:white;'>                 <th style='padding:5px;'>Name</th>                 <th style='padding:5px;'>Primary Subject</th>                 <th style='padding:5px;'>Other Subjects</th>                 <th style='padding:5px;'>Mobile</th>                 <th style='padding:5px;'>Email</th>                 <th style='padding:5px;'>Tutoring</th>                 <th style='padding:5px;'>Training/Notes</th>             </tr>                  <tr style='background:#f9f9f9;'>                 <td style='padding:5px;'>Dr. Joshua Ray</td>                 <td style='padding:5px;'>Leadership</td>                 <td style='padding:5px;'></td>                 <td style='padding:5px;'>479-221-1670</td>                 <td style='padding:5px;'>jray711@gmail.com</td>                 <td style='padding:5px;'></td>                 <td style='padding:5px;'></td>             </tr>         </table></div></div>`)[0];
+                popup_36f735155c70f0b1928e6baf69897ba3.setContent(html_b907e4237bd58137e13719b5f9b428e8);
+            
+        
+
+        circle_marker_e32805fd3274ea8f9750f42649cea905.bindPopup(popup_36f735155c70f0b1928e6baf69897ba3)
+        ;
+
+        
+    
+    
+            circle_marker_e32805fd3274ea8f9750f42649cea905.bindTooltip(
+                `<div>
+                     Fort Smith
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a8e959c02d484aaf3d2ba013ec3b9f72 = L.circleMarker(
+                [36.3354, -93.436],
+                {"bubblingMouseEvents": true, "color": "#2b3e50", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2b3e50", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(feature_group_9e52996556f6aa97c5ffc5cc08b8bb38);
+        
+    
+        var popup_bcc90bf6bf7e62d09d202582f82c2526 = L.popup({
+  "maxWidth": 700,
+});
+
+        
+            
+                var html_38061ce2ea9acc4f05d488903ae11b82 = $(`<div id="html_38061ce2ea9acc4f05d488903ae11b82" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial,sans-serif; max-height:400px; overflow-y:auto;'>         <h4>Green Forest</h4>         <p><b>Consultants:</b> 1<br><b>Subjects:</b> ELA: 1</p>         <table style='width:100%; border-collapse:collapse; font-size:11px;'>             <tr style='background:#2b3e50; color:white;'>                 <th style='padding:5px;'>Name</th>                 <th style='padding:5px;'>Primary Subject</th>                 <th style='padding:5px;'>Other Subjects</th>                 <th style='padding:5px;'>Mobile</th>                 <th style='padding:5px;'>Email</th>                 <th style='padding:5px;'>Tutoring</th>                 <th style='padding:5px;'>Training/Notes</th>             </tr>                  <tr style='background:#f9f9f9;'>                 <td style='padding:5px;'>Annette Phillips</td>                 <td style='padding:5px;'>ELA</td>                 <td style='padding:5px;'></td>                 <td style='padding:5px;'>870-350-1339</td>                 <td style='padding:5px;'>web_teach@hotmail.com</td>                 <td style='padding:5px;'>Yes</td>                 <td style='padding:5px;'></td>             </tr>         </table></div></div>`)[0];
+                popup_bcc90bf6bf7e62d09d202582f82c2526.setContent(html_38061ce2ea9acc4f05d488903ae11b82);
+            
+        
+
+        circle_marker_a8e959c02d484aaf3d2ba013ec3b9f72.bindPopup(popup_bcc90bf6bf7e62d09d202582f82c2526)
+        ;
+
+        
+    
+    
+            circle_marker_a8e959c02d484aaf3d2ba013ec3b9f72.bindTooltip(
+                `<div>
+                     Green Forest
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e42cf5347f52578e2b9198d702750fc1 = L.circleMarker(
+                [35.5643, -90.7168],
+                {"bubblingMouseEvents": true, "color": "#2b3e50", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2b3e50", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(feature_group_9e52996556f6aa97c5ffc5cc08b8bb38);
+        
+    
+        var popup_7ba1ae34e78ee34c1770e11e04eaa172 = L.popup({
+  "maxWidth": 700,
+});
+
+        
+            
+                var html_f457abf50af78eee9eb88b594e16e6e7 = $(`<div id="html_f457abf50af78eee9eb88b594e16e6e7" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial,sans-serif; max-height:400px; overflow-y:auto;'>         <h4>Harrisburg</h4>         <p><b>Consultants:</b> 1<br><b>Subjects:</b> Leadership: 1</p>         <table style='width:100%; border-collapse:collapse; font-size:11px;'>             <tr style='background:#2b3e50; color:white;'>                 <th style='padding:5px;'>Name</th>                 <th style='padding:5px;'>Primary Subject</th>                 <th style='padding:5px;'>Other Subjects</th>                 <th style='padding:5px;'>Mobile</th>                 <th style='padding:5px;'>Email</th>                 <th style='padding:5px;'>Tutoring</th>                 <th style='padding:5px;'>Training/Notes</th>             </tr>                  <tr style='background:#f9f9f9;'>                 <td style='padding:5px;'>Terri McCann</td>                 <td style='padding:5px;'>Leadership</td>                 <td style='padding:5px;'></td>                 <td style='padding:5px;'>870-284-5485</td>                 <td style='padding:5px;'>tdmccann84@gmail.com</td>                 <td style='padding:5px;'>Maybe</td>                 <td style='padding:5px;'>Yes ELA</td>             </tr>         </table></div></div>`)[0];
+                popup_7ba1ae34e78ee34c1770e11e04eaa172.setContent(html_f457abf50af78eee9eb88b594e16e6e7);
+            
+        
+
+        circle_marker_e42cf5347f52578e2b9198d702750fc1.bindPopup(popup_7ba1ae34e78ee34c1770e11e04eaa172)
+        ;
+
+        
+    
+    
+            circle_marker_e42cf5347f52578e2b9198d702750fc1.bindTooltip(
+                `<div>
+                     Harrisburg
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_06fbc2c5b9a30d76b3b846e80eda8326 = L.circleMarker(
+                [34.5054, -92.2054],
+                {"bubblingMouseEvents": true, "color": "#2b3e50", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2b3e50", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(feature_group_9e52996556f6aa97c5ffc5cc08b8bb38);
+        
+    
+        var popup_f7daf74eeeaf42ba89d56d25596f4bdf = L.popup({
+  "maxWidth": 700,
+});
+
+        
+            
+                var html_09755aa9f7a47812ace9963a0df5b212 = $(`<div id="html_09755aa9f7a47812ace9963a0df5b212" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial,sans-serif; max-height:400px; overflow-y:auto;'>         <h4>Hensley</h4>         <p><b>Consultants:</b> 1<br><b>Subjects:</b> Leadership: 1</p>         <table style='width:100%; border-collapse:collapse; font-size:11px;'>             <tr style='background:#2b3e50; color:white;'>                 <th style='padding:5px;'>Name</th>                 <th style='padding:5px;'>Primary Subject</th>                 <th style='padding:5px;'>Other Subjects</th>                 <th style='padding:5px;'>Mobile</th>                 <th style='padding:5px;'>Email</th>                 <th style='padding:5px;'>Tutoring</th>                 <th style='padding:5px;'>Training/Notes</th>             </tr>                  <tr style='background:#f9f9f9;'>                 <td style='padding:5px;'>Crystal Mitchell</td>                 <td style='padding:5px;'>Leadership</td>                 <td style='padding:5px;'>Math</td>                 <td style='padding:5px;'>501-553-3737</td>                 <td style='padding:5px;'>crystal.a.mitchell@icloud.com</td>                 <td style='padding:5px;'>Yes</td>                 <td style='padding:5px;'>Yes ELA</td>             </tr>         </table></div></div>`)[0];
+                popup_f7daf74eeeaf42ba89d56d25596f4bdf.setContent(html_09755aa9f7a47812ace9963a0df5b212);
+            
+        
+
+        circle_marker_06fbc2c5b9a30d76b3b846e80eda8326.bindPopup(popup_f7daf74eeeaf42ba89d56d25596f4bdf)
+        ;
+
+        
+    
+    
+            circle_marker_06fbc2c5b9a30d76b3b846e80eda8326.bindTooltip(
+                `<div>
+                     Hensley
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_523f85beb8a32712ed9ffad4bec58128 = L.circleMarker(
+                [35.5081, -90.1473],
+                {"bubblingMouseEvents": true, "color": "#2b3e50", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2b3e50", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(feature_group_9e52996556f6aa97c5ffc5cc08b8bb38);
+        
+    
+        var popup_c0af2d74cc6c1e17cf98384b9631d951 = L.popup({
+  "maxWidth": 700,
+});
+
+        
+            
+                var html_6699149173d3efb1df1f35252ecfcb0e = $(`<div id="html_6699149173d3efb1df1f35252ecfcb0e" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial,sans-serif; max-height:400px; overflow-y:auto;'>         <h4>Joiner</h4>         <p><b>Consultants:</b> 1<br><b>Subjects:</b> Leadership: 1</p>         <table style='width:100%; border-collapse:collapse; font-size:11px;'>             <tr style='background:#2b3e50; color:white;'>                 <th style='padding:5px;'>Name</th>                 <th style='padding:5px;'>Primary Subject</th>                 <th style='padding:5px;'>Other Subjects</th>                 <th style='padding:5px;'>Mobile</th>                 <th style='padding:5px;'>Email</th>                 <th style='padding:5px;'>Tutoring</th>                 <th style='padding:5px;'>Training/Notes</th>             </tr>                  <tr style='background:#f9f9f9;'>                 <td style='padding:5px;'>Sally Bennett</td>                 <td style='padding:5px;'>Leadership</td>                 <td style='padding:5px;'></td>                 <td style='padding:5px;'>501-454-5093</td>                 <td style='padding:5px;'>sallyeudybennett@gmail.com</td>                 <td style='padding:5px;'></td>                 <td style='padding:5px;'></td>             </tr>         </table></div></div>`)[0];
+                popup_c0af2d74cc6c1e17cf98384b9631d951.setContent(html_6699149173d3efb1df1f35252ecfcb0e);
+            
+        
+
+        circle_marker_523f85beb8a32712ed9ffad4bec58128.bindPopup(popup_c0af2d74cc6c1e17cf98384b9631d951)
+        ;
+
+        
+    
+    
+            circle_marker_523f85beb8a32712ed9ffad4bec58128.bindTooltip(
+                `<div>
+                     Joiner
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_0c46d160a00233cf572c88d3e487621a = L.circleMarker(
+                [34.7839, -91.8999],
+                {"bubblingMouseEvents": true, "color": "#2b3e50", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2b3e50", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(feature_group_9e52996556f6aa97c5ffc5cc08b8bb38);
+        
+    
+        var popup_cc351f332cbf1495355049fa6cba4185 = L.popup({
+  "maxWidth": 700,
+});
+
+        
+            
+                var html_33d59501f9041db57d32ea678368694b = $(`<div id="html_33d59501f9041db57d32ea678368694b" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial,sans-serif; max-height:400px; overflow-y:auto;'>         <h4>Lonoke</h4>         <p><b>Consultants:</b> 1<br><b>Subjects:</b> Math: 1</p>         <table style='width:100%; border-collapse:collapse; font-size:11px;'>             <tr style='background:#2b3e50; color:white;'>                 <th style='padding:5px;'>Name</th>                 <th style='padding:5px;'>Primary Subject</th>                 <th style='padding:5px;'>Other Subjects</th>                 <th style='padding:5px;'>Mobile</th>                 <th style='padding:5px;'>Email</th>                 <th style='padding:5px;'>Tutoring</th>                 <th style='padding:5px;'>Training/Notes</th>             </tr>                  <tr style='background:#f9f9f9;'>                 <td style='padding:5px;'>Dawn Verkler</td>                 <td style='padding:5px;'>Math</td>                 <td style='padding:5px;'>Leadership</td>                 <td style='padding:5px;'>501-680-9993</td>                 <td style='padding:5px;'>ddkverkler@yahoo.com</td>                 <td style='padding:5px;'>Yes</td>                 <td style='padding:5px;'></td>             </tr>         </table></div></div>`)[0];
+                popup_cc351f332cbf1495355049fa6cba4185.setContent(html_33d59501f9041db57d32ea678368694b);
+            
+        
+
+        circle_marker_0c46d160a00233cf572c88d3e487621a.bindPopup(popup_cc351f332cbf1495355049fa6cba4185)
+        ;
+
+        
+    
+    
+            circle_marker_0c46d160a00233cf572c88d3e487621a.bindTooltip(
+                `<div>
+                     Lonoke
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_81b2af710ba96d5b68d277a12d542fd9 = L.circleMarker(
+                [34.657, -92.3868],
+                {"bubblingMouseEvents": true, "color": "#2b3e50", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2b3e50", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(feature_group_9e52996556f6aa97c5ffc5cc08b8bb38);
+        
+    
+        var popup_7c44a80580d393be36df9e0fcc4ad544 = L.popup({
+  "maxWidth": 700,
+});
+
+        
+            
+                var html_c7c67e890e74de4ee8f00daa7e309567 = $(`<div id="html_c7c67e890e74de4ee8f00daa7e309567" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial,sans-serif; max-height:400px; overflow-y:auto;'>         <h4>Mabelvale</h4>         <p><b>Consultants:</b> 1<br><b>Subjects:</b> Leadership: 1</p>         <table style='width:100%; border-collapse:collapse; font-size:11px;'>             <tr style='background:#2b3e50; color:white;'>                 <th style='padding:5px;'>Name</th>                 <th style='padding:5px;'>Primary Subject</th>                 <th style='padding:5px;'>Other Subjects</th>                 <th style='padding:5px;'>Mobile</th>                 <th style='padding:5px;'>Email</th>                 <th style='padding:5px;'>Tutoring</th>                 <th style='padding:5px;'>Training/Notes</th>             </tr>                  <tr style='background:#f9f9f9;'>                 <td style='padding:5px;'>Terri Guy</td>                 <td style='padding:5px;'>Leadership</td>                 <td style='padding:5px;'>ELA</td>                 <td style='padding:5px;'>501-557-8749</td>                 <td style='padding:5px;'>terriguy7007@gmail.com</td>                 <td style='padding:5px;'></td>                 <td style='padding:5px;'>Available on Mondays and Fridays</td>             </tr>         </table></div></div>`)[0];
+                popup_7c44a80580d393be36df9e0fcc4ad544.setContent(html_c7c67e890e74de4ee8f00daa7e309567);
+            
+        
+
+        circle_marker_81b2af710ba96d5b68d277a12d542fd9.bindPopup(popup_7c44a80580d393be36df9e0fcc4ad544)
+        ;
+
+        
+    
+    
+            circle_marker_81b2af710ba96d5b68d277a12d542fd9.bindTooltip(
+                `<div>
+                     Mabelvale
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_c2354c0306329cc5f77773c3adbec127 = L.circleMarker(
+                [35.1151, -91.8807],
+                {"bubblingMouseEvents": true, "color": "#2b3e50", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2b3e50", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(feature_group_9e52996556f6aa97c5ffc5cc08b8bb38);
+        
+    
+        var popup_cff3918797b510eee73a12a15f00275f = L.popup({
+  "maxWidth": 700,
+});
+
+        
+            
+                var html_ed587f3b904411b70bfda9ff51942ad7 = $(`<div id="html_ed587f3b904411b70bfda9ff51942ad7" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial,sans-serif; max-height:400px; overflow-y:auto;'>         <h4>McRae</h4>         <p><b>Consultants:</b> 1<br><b>Subjects:</b> ELA (Middle): 1</p>         <table style='width:100%; border-collapse:collapse; font-size:11px;'>             <tr style='background:#2b3e50; color:white;'>                 <th style='padding:5px;'>Name</th>                 <th style='padding:5px;'>Primary Subject</th>                 <th style='padding:5px;'>Other Subjects</th>                 <th style='padding:5px;'>Mobile</th>                 <th style='padding:5px;'>Email</th>                 <th style='padding:5px;'>Tutoring</th>                 <th style='padding:5px;'>Training/Notes</th>             </tr>                  <tr style='background:#f9f9f9;'>                 <td style='padding:5px;'>Barbara Henry</td>                 <td style='padding:5px;'>ELA (Middle)</td>                 <td style='padding:5px;'>Math (Middle)</td>                 <td style='padding:5px;'>501-207-1415</td>                 <td style='padding:5px;'>bhjr279@gmail.com</td>                 <td style='padding:5px;'></td>                 <td style='padding:5px;'></td>             </tr>         </table></div></div>`)[0];
+                popup_cff3918797b510eee73a12a15f00275f.setContent(html_ed587f3b904411b70bfda9ff51942ad7);
+            
+        
+
+        circle_marker_c2354c0306329cc5f77773c3adbec127.bindPopup(popup_cff3918797b510eee73a12a15f00275f)
+        ;
+
+        
+    
+    
+            circle_marker_c2354c0306329cc5f77773c3adbec127.bindTooltip(
+                `<div>
+                     McRae
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_15e0e6a34d0b6534cc6848009bf98f08 = L.circleMarker(
+                [35.2912, -93.4202],
+                {"bubblingMouseEvents": true, "color": "#2b3e50", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2b3e50", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(feature_group_9e52996556f6aa97c5ffc5cc08b8bb38);
+        
+    
+        var popup_5e8078be791ca862a202d02dbe1eafbe = L.popup({
+  "maxWidth": 700,
+});
+
+        
+            
+                var html_a7edab6844483b0c96e94166bcf640f1 = $(`<div id="html_a7edab6844483b0c96e94166bcf640f1" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial,sans-serif; max-height:400px; overflow-y:auto;'>         <h4>New Blaine</h4>         <p><b>Consultants:</b> 1<br><b>Subjects:</b> ELA: 1</p>         <table style='width:100%; border-collapse:collapse; font-size:11px;'>             <tr style='background:#2b3e50; color:white;'>                 <th style='padding:5px;'>Name</th>                 <th style='padding:5px;'>Primary Subject</th>                 <th style='padding:5px;'>Other Subjects</th>                 <th style='padding:5px;'>Mobile</th>                 <th style='padding:5px;'>Email</th>                 <th style='padding:5px;'>Tutoring</th>                 <th style='padding:5px;'>Training/Notes</th>             </tr>                  <tr style='background:#f9f9f9;'>                 <td style='padding:5px;'>Kelly Mclaughlin</td>                 <td style='padding:5px;'>ELA</td>                 <td style='padding:5px;'>Leadership</td>                 <td style='padding:5px;'>501-733-7163</td>                 <td style='padding:5px;'>kellymc.consulting@gmail.com</td>                 <td style='padding:5px;'>Yes</td>                 <td style='padding:5px;'>Yes ELA</td>             </tr>         </table></div></div>`)[0];
+                popup_5e8078be791ca862a202d02dbe1eafbe.setContent(html_a7edab6844483b0c96e94166bcf640f1);
+            
+        
+
+        circle_marker_15e0e6a34d0b6534cc6848009bf98f08.bindPopup(popup_5e8078be791ca862a202d02dbe1eafbe)
+        ;
+
+        
+    
+    
+            circle_marker_15e0e6a34d0b6534cc6848009bf98f08.bindTooltip(
+                `<div>
+                     New Blaine
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_ac64a28a75493b9ddfc2537e8d738425 = L.circleMarker(
+                [36.0584, -90.4973],
+                {"bubblingMouseEvents": true, "color": "#2b3e50", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2b3e50", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(feature_group_9e52996556f6aa97c5ffc5cc08b8bb38);
+        
+    
+        var popup_3ac34ad5ad7da08bde0de533b34de53c = L.popup({
+  "maxWidth": 700,
+});
+
+        
+            
+                var html_35a110ae4e5b3c4f2eada7fa774f1f42 = $(`<div id="html_35a110ae4e5b3c4f2eada7fa774f1f42" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial,sans-serif; max-height:400px; overflow-y:auto;'>         <h4>Paragould</h4>         <p><b>Consultants:</b> 1<br><b>Subjects:</b> ELA K12: 1</p>         <table style='width:100%; border-collapse:collapse; font-size:11px;'>             <tr style='background:#2b3e50; color:white;'>                 <th style='padding:5px;'>Name</th>                 <th style='padding:5px;'>Primary Subject</th>                 <th style='padding:5px;'>Other Subjects</th>                 <th style='padding:5px;'>Mobile</th>                 <th style='padding:5px;'>Email</th>                 <th style='padding:5px;'>Tutoring</th>                 <th style='padding:5px;'>Training/Notes</th>             </tr>                  <tr style='background:#f9f9f9;'>                 <td style='padding:5px;'>Laura Wooldridge</td>                 <td style='padding:5px;'>ELA K12</td>                 <td style='padding:5px;'>Leadership</td>                 <td style='padding:5px;'>870-240-3374</td>                 <td style='padding:5px;'>laurawooldridge.beg@gmail.com</td>                 <td style='padding:5px;'></td>                 <td style='padding:5px;'></td>             </tr>         </table></div></div>`)[0];
+                popup_3ac34ad5ad7da08bde0de533b34de53c.setContent(html_35a110ae4e5b3c4f2eada7fa774f1f42);
+            
+        
+
+        circle_marker_ac64a28a75493b9ddfc2537e8d738425.bindPopup(popup_3ac34ad5ad7da08bde0de533b34de53c)
+        ;
+
+        
+    
+    
+            circle_marker_ac64a28a75493b9ddfc2537e8d738425.bindTooltip(
+                `<div>
+                     Paragould
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_17a7adffb5ff34ab3c9863b0db76d221 = L.circleMarker(
+                [34.2284, -92.0032],
+                {"bubblingMouseEvents": true, "color": "#2b3e50", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2b3e50", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(feature_group_9e52996556f6aa97c5ffc5cc08b8bb38);
+        
+    
+        var popup_aa35d038b84b19ae65a7f245344f7489 = L.popup({
+  "maxWidth": 700,
+});
+
+        
+            
+                var html_d86ca63641a0aaa404199b4c324eacb4 = $(`<div id="html_d86ca63641a0aaa404199b4c324eacb4" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial,sans-serif; max-height:400px; overflow-y:auto;'>         <h4>Pine Bluff</h4>         <p><b>Consultants:</b> 1<br><b>Subjects:</b> Leadership: 1</p>         <table style='width:100%; border-collapse:collapse; font-size:11px;'>             <tr style='background:#2b3e50; color:white;'>                 <th style='padding:5px;'>Name</th>                 <th style='padding:5px;'>Primary Subject</th>                 <th style='padding:5px;'>Other Subjects</th>                 <th style='padding:5px;'>Mobile</th>                 <th style='padding:5px;'>Email</th>                 <th style='padding:5px;'>Tutoring</th>                 <th style='padding:5px;'>Training/Notes</th>             </tr>                  <tr style='background:#f9f9f9;'>                 <td style='padding:5px;'>Dee Davis</td>                 <td style='padding:5px;'>Leadership</td>                 <td style='padding:5px;'>ELA</td>                 <td style='padding:5px;'>870-489-5940</td>                 <td style='padding:5px;'>deedavis.beg@gmail.com</td>                 <td style='padding:5px;'></td>                 <td style='padding:5px;'>Yes Math</td>             </tr>         </table></div></div>`)[0];
+                popup_aa35d038b84b19ae65a7f245344f7489.setContent(html_d86ca63641a0aaa404199b4c324eacb4);
+            
+        
+
+        circle_marker_17a7adffb5ff34ab3c9863b0db76d221.bindPopup(popup_aa35d038b84b19ae65a7f245344f7489)
+        ;
+
+        
+    
+    
+            circle_marker_17a7adffb5ff34ab3c9863b0db76d221.bindTooltip(
+                `<div>
+                     Pine Bluff
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_2f639aeb3f97285a9f2a0fd1dc7c1d81 = L.circleMarker(
+                [36.2631, -90.2926],
+                {"bubblingMouseEvents": true, "color": "#2b3e50", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2b3e50", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(feature_group_9e52996556f6aa97c5ffc5cc08b8bb38);
+        
+    
+        var popup_97860a88b6dd6b39fecd21269ab6f5f3 = L.popup({
+  "maxWidth": 700,
+});
+
+        
+            
+                var html_8154e86e35ec5a50a2992d428f1cc7b4 = $(`<div id="html_8154e86e35ec5a50a2992d428f1cc7b4" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial,sans-serif; max-height:400px; overflow-y:auto;'>         <h4>Rector</h4>         <p><b>Consultants:</b> 1<br><b>Subjects:</b> ELA (Secondary): 1</p>         <table style='width:100%; border-collapse:collapse; font-size:11px;'>             <tr style='background:#2b3e50; color:white;'>                 <th style='padding:5px;'>Name</th>                 <th style='padding:5px;'>Primary Subject</th>                 <th style='padding:5px;'>Other Subjects</th>                 <th style='padding:5px;'>Mobile</th>                 <th style='padding:5px;'>Email</th>                 <th style='padding:5px;'>Tutoring</th>                 <th style='padding:5px;'>Training/Notes</th>             </tr>                  <tr style='background:#f9f9f9;'>                 <td style='padding:5px;'>Dr. Chelsea Clark</td>                 <td style='padding:5px;'>ELA (Secondary)</td>                 <td style='padding:5px;'>Leadership</td>                 <td style='padding:5px;'>662-934-9538</td>                 <td style='padding:5px;'>chelseaaustinclark@gmail.com</td>                 <td style='padding:5px;'>Yes</td>                 <td style='padding:5px;'>Yes ELA</td>             </tr>         </table></div></div>`)[0];
+                popup_97860a88b6dd6b39fecd21269ab6f5f3.setContent(html_8154e86e35ec5a50a2992d428f1cc7b4);
+            
+        
+
+        circle_marker_2f639aeb3f97285a9f2a0fd1dc7c1d81.bindPopup(popup_97860a88b6dd6b39fecd21269ab6f5f3)
+        ;
+
+        
+    
+    
+            circle_marker_2f639aeb3f97285a9f2a0fd1dc7c1d81.bindTooltip(
+                `<div>
+                     Rector
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_2025c4764be258bd2c8f9ec9b4f020ae = L.circleMarker(
+                [36.332, -94.1185],
+                {"bubblingMouseEvents": true, "color": "#2b3e50", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2b3e50", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(feature_group_9e52996556f6aa97c5ffc5cc08b8bb38);
+        
+    
+        var popup_4cac8ae3508d1f2a07bb66db3ac23dfb = L.popup({
+  "maxWidth": 700,
+});
+
+        
+            
+                var html_8b33b37afccbe8b631ebb8e5db2dfc5d = $(`<div id="html_8b33b37afccbe8b631ebb8e5db2dfc5d" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial,sans-serif; max-height:400px; overflow-y:auto;'>         <h4>Rogers</h4>         <p><b>Consultants:</b> 1<br><b>Subjects:</b> Leadership: 1</p>         <table style='width:100%; border-collapse:collapse; font-size:11px;'>             <tr style='background:#2b3e50; color:white;'>                 <th style='padding:5px;'>Name</th>                 <th style='padding:5px;'>Primary Subject</th>                 <th style='padding:5px;'>Other Subjects</th>                 <th style='padding:5px;'>Mobile</th>                 <th style='padding:5px;'>Email</th>                 <th style='padding:5px;'>Tutoring</th>                 <th style='padding:5px;'>Training/Notes</th>             </tr>                  <tr style='background:#f9f9f9;'>                 <td style='padding:5px;'>Rob Lindley</td>                 <td style='padding:5px;'>Leadership</td>                 <td style='padding:5px;'></td>                 <td style='padding:5px;'>870-897-6387</td>                 <td style='padding:5px;'>rlindley0316@gmail.com</td>                 <td style='padding:5px;'>Yes</td>                 <td style='padding:5px;'>Yes ELA; Unavailable: May 5-16, June 16-20, July 7-10, Aug 13-Oct 3</td>             </tr>         </table></div></div>`)[0];
+                popup_4cac8ae3508d1f2a07bb66db3ac23dfb.setContent(html_8b33b37afccbe8b631ebb8e5db2dfc5d);
+            
+        
+
+        circle_marker_2025c4764be258bd2c8f9ec9b4f020ae.bindPopup(popup_4cac8ae3508d1f2a07bb66db3ac23dfb)
+        ;
+
+        
+    
+    
+            circle_marker_2025c4764be258bd2c8f9ec9b4f020ae.bindTooltip(
+                `<div>
+                     Rogers
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_7e690fc5ef89e0395e61c93b3581a561 = L.circleMarker(
+                [36.3712, -91.8226],
+                {"bubblingMouseEvents": true, "color": "#2b3e50", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2b3e50", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(feature_group_9e52996556f6aa97c5ffc5cc08b8bb38);
+        
+    
+        var popup_ae82f96a26e4962013f4ab8d94a0f460 = L.popup({
+  "maxWidth": 700,
+});
+
+        
+            
+                var html_01068c3f7929e13faefce9d158eddfa5 = $(`<div id="html_01068c3f7929e13faefce9d158eddfa5" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial,sans-serif; max-height:400px; overflow-y:auto;'>         <h4>Salem</h4>         <p><b>Consultants:</b> 1<br><b>Subjects:</b> ELA: 1</p>         <table style='width:100%; border-collapse:collapse; font-size:11px;'>             <tr style='background:#2b3e50; color:white;'>                 <th style='padding:5px;'>Name</th>                 <th style='padding:5px;'>Primary Subject</th>                 <th style='padding:5px;'>Other Subjects</th>                 <th style='padding:5px;'>Mobile</th>                 <th style='padding:5px;'>Email</th>                 <th style='padding:5px;'>Tutoring</th>                 <th style='padding:5px;'>Training/Notes</th>             </tr>                  <tr style='background:#f9f9f9;'>                 <td style='padding:5px;'>Dr. Merlina McCullough</td>                 <td style='padding:5px;'>ELA</td>                 <td style='padding:5px;'>EL, Leadership</td>                 <td style='padding:5px;'>870-656-9470</td>                 <td style='padding:5px;'>mcculloughmerlina@gmail.com</td>                 <td style='padding:5px;'>Yes</td>                 <td style='padding:5px;'>Yes ELA</td>             </tr>         </table></div></div>`)[0];
+                popup_ae82f96a26e4962013f4ab8d94a0f460.setContent(html_01068c3f7929e13faefce9d158eddfa5);
+            
+        
+
+        circle_marker_7e690fc5ef89e0395e61c93b3581a561.bindPopup(popup_ae82f96a26e4962013f4ab8d94a0f460)
+        ;
+
+        
+    
+    
+            circle_marker_7e690fc5ef89e0395e61c93b3581a561.bindTooltip(
+                `<div>
+                     Salem
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_5e463b38a00f305a9fdc358a910b0bb7 = L.circleMarker(
+                [35.0304, -91.9501],
+                {"bubblingMouseEvents": true, "color": "#2b3e50", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2b3e50", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(feature_group_9e52996556f6aa97c5ffc5cc08b8bb38);
+        
+    
+        var popup_9554e6fa29346ef1633e9d289bd94f85 = L.popup({
+  "maxWidth": 700,
+});
+
+        
+            
+                var html_b079a04c53eafee5357da8f36b876aae = $(`<div id="html_b079a04c53eafee5357da8f36b876aae" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial,sans-serif; max-height:400px; overflow-y:auto;'>         <h4>Ward</h4>         <p><b>Consultants:</b> 1<br><b>Subjects:</b> SPED: 1</p>         <table style='width:100%; border-collapse:collapse; font-size:11px;'>             <tr style='background:#2b3e50; color:white;'>                 <th style='padding:5px;'>Name</th>                 <th style='padding:5px;'>Primary Subject</th>                 <th style='padding:5px;'>Other Subjects</th>                 <th style='padding:5px;'>Mobile</th>                 <th style='padding:5px;'>Email</th>                 <th style='padding:5px;'>Tutoring</th>                 <th style='padding:5px;'>Training/Notes</th>             </tr>                  <tr style='background:#f9f9f9;'>                 <td style='padding:5px;'>Joanne Blalock</td>                 <td style='padding:5px;'>SPED</td>                 <td style='padding:5px;'>Leadership</td>                 <td style='padding:5px;'>501-605-6403</td>                 <td style='padding:5px;'>jmblalock185@gmail.com</td>                 <td style='padding:5px;'>Yes</td>                 <td style='padding:5px;'>Yes ELA</td>             </tr>         </table></div></div>`)[0];
+                popup_9554e6fa29346ef1633e9d289bd94f85.setContent(html_b079a04c53eafee5357da8f36b876aae);
+            
+        
+
+        circle_marker_5e463b38a00f305a9fdc358a910b0bb7.bindPopup(popup_9554e6fa29346ef1633e9d289bd94f85)
+        ;
+
+        
+    
+    
+            circle_marker_5e463b38a00f305a9fdc358a910b0bb7.bindTooltip(
+                `<div>
+                     Ward
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_ed125c6f7f29926aca99788783daae69 = L.circleMarker(
+                [34.5291, -90.5901],
+                {"bubblingMouseEvents": true, "color": "#2b3e50", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2b3e50", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(feature_group_9e52996556f6aa97c5ffc5cc08b8bb38);
+        
+    
+        var popup_50c63851debe62fcde82bf63d184df39 = L.popup({
+  "maxWidth": 700,
+});
+
+        
+            
+                var html_c8639fb0b16bb5a185a01b71abfe8db9 = $(`<div id="html_c8639fb0b16bb5a185a01b71abfe8db9" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial,sans-serif; max-height:400px; overflow-y:auto;'>         <h4>Helena/West Helena</h4>         <p><b>Consultants:</b> 1<br><b>Subjects:</b> Not onboarded: 1</p>         <table style='width:100%; border-collapse:collapse; font-size:11px;'>             <tr style='background:#2b3e50; color:white;'>                 <th style='padding:5px;'>Name</th>                 <th style='padding:5px;'>Primary Subject</th>                 <th style='padding:5px;'>Other Subjects</th>                 <th style='padding:5px;'>Mobile</th>                 <th style='padding:5px;'>Email</th>                 <th style='padding:5px;'>Tutoring</th>                 <th style='padding:5px;'>Training/Notes</th>             </tr>                  <tr style='background:#f9f9f9;'>                 <td style='padding:5px;'>Francine Swickheimer</td>                 <td style='padding:5px;'>Not onboarded</td>                 <td style='padding:5px;'></td>                 <td style='padding:5px;'></td>                 <td style='padding:5px;'></td>                 <td style='padding:5px;'></td>                 <td style='padding:5px;'>Applied/Not onboarded</td>             </tr>         </table></div></div>`)[0];
+                popup_50c63851debe62fcde82bf63d184df39.setContent(html_c8639fb0b16bb5a185a01b71abfe8db9);
+            
+        
+
+        circle_marker_ed125c6f7f29926aca99788783daae69.bindPopup(popup_50c63851debe62fcde82bf63d184df39)
+        ;
+
+        
+    
+    
+            circle_marker_ed125c6f7f29926aca99788783daae69.bindTooltip(
+                `<div>
+                     Helena/West Helena
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_75ed450c8d4f3e4f7d5f9a7195b473c1 = L.circleMarker(
+                [34.0379, -94.3413],
+                {"bubblingMouseEvents": true, "color": "#2b3e50", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2b3e50", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(feature_group_9e52996556f6aa97c5ffc5cc08b8bb38);
+        
+    
+        var popup_a9b273385a926931978e480a9828cb89 = L.popup({
+  "maxWidth": 700,
+});
+
+        
+            
+                var html_2907f5bf29d829bc14ac50cd60ac7017 = $(`<div id="html_2907f5bf29d829bc14ac50cd60ac7017" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial,sans-serif; max-height:400px; overflow-y:auto;'>         <h4>DeQueen</h4>         <p><b>Consultants:</b> 1<br><b>Subjects:</b> Not onboarded: 1</p>         <table style='width:100%; border-collapse:collapse; font-size:11px;'>             <tr style='background:#2b3e50; color:white;'>                 <th style='padding:5px;'>Name</th>                 <th style='padding:5px;'>Primary Subject</th>                 <th style='padding:5px;'>Other Subjects</th>                 <th style='padding:5px;'>Mobile</th>                 <th style='padding:5px;'>Email</th>                 <th style='padding:5px;'>Tutoring</th>                 <th style='padding:5px;'>Training/Notes</th>             </tr>                  <tr style='background:#f9f9f9;'>                 <td style='padding:5px;'>Gayla Youngblood</td>                 <td style='padding:5px;'>Not onboarded</td>                 <td style='padding:5px;'></td>                 <td style='padding:5px;'></td>                 <td style='padding:5px;'></td>                 <td style='padding:5px;'></td>                 <td style='padding:5px;'>Applied/Not onboarded</td>             </tr>         </table></div></div>`)[0];
+                popup_a9b273385a926931978e480a9828cb89.setContent(html_2907f5bf29d829bc14ac50cd60ac7017);
+            
+        
+
+        circle_marker_75ed450c8d4f3e4f7d5f9a7195b473c1.bindPopup(popup_a9b273385a926931978e480a9828cb89)
+        ;
+
+        
+    
+    
+            circle_marker_75ed450c8d4f3e4f7d5f9a7195b473c1.bindTooltip(
+                `<div>
+                     DeQueen
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            feature_group_9e52996556f6aa97c5ffc5cc08b8bb38.addTo(map_83ef3ae7f4b88f349e4b17254af606ba);
+        
+    
+            var layer_control_74eed78dece69f27b858bc2f71034d92_layers = {
+                base_layers : {
+                    "cartodbpositron" : tile_layer_c49e8720b8e3add061800e6865aec544,
+                },
+                overlays :  {
+                    "Consultant Density" : feature_group_203ad419299197a2d81cba4c05a62b54,
+                    "Consultant Locations" : feature_group_9e52996556f6aa97c5ffc5cc08b8bb38,
+                },
+            };
+            let layer_control_74eed78dece69f27b858bc2f71034d92 = L.control.layers(
+                layer_control_74eed78dece69f27b858bc2f71034d92_layers.base_layers,
+                layer_control_74eed78dece69f27b858bc2f71034d92_layers.overlays,
+                {
+  "position": "topright",
+  "collapsed": true,
+  "autoZIndex": true,
+}
+            ).addTo(map_83ef3ae7f4b88f349e4b17254af606ba);
+
+        
+</script>
+</html>
